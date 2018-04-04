@@ -1,0 +1,3 @@
+[submodule "openbsd"]
+	path = openbsd
+	url = https://github.com/libressl-portable/openbsd.git
