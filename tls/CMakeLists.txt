@@ -42,13 +42,13 @@ if (BUILD_SHARED_LIBS)
 	target_link_libraries(tls ssl crypto)
 	if (WIN32)
 		target_link_libraries(tls Ws2_32.lib)
-		set(TLS_POSTFIX -${TLS_MAJOR_VERSION})
 	endif()
-	set_target_properties(tls PROPERTIES
-		OUTPUT_NAME tls${TLS_POSTFIX}
-		ARCHIVE_OUTPUT_NAME tls${TLS_POSTFIX})
+	set_target_properties(tls PROPERTIES PREFIX "lib")
 	set_target_properties(tls PROPERTIES VERSION ${TLS_VERSION}
-		SOVERSION ${TLS_MAJOR_VERSION})
+		SOVERSION ${TLS_MAJOR_VERSION}
+		PREFIX "lib"
+		OUTPUT_NAME "tls"
+	)
 endif()
 
 if(ENABLE_LIBRESSL_INSTALL)

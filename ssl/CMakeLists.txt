@@ -53,13 +53,13 @@ if (BUILD_SHARED_LIBS)
 	target_link_libraries(ssl crypto)
 	if (WIN32)
 		target_link_libraries(ssl Ws2_32.lib)
-		set(SSL_POSTFIX -${SSL_MAJOR_VERSION})
 	endif()
-	set_target_properties(ssl PROPERTIES
-		OUTPUT_NAME ssl${SSL_POSTFIX}
-		ARCHIVE_OUTPUT_NAME ssl${SSL_POSTFIX})
+	set_target_properties(ssl PROPERTIES PREFIX "lib")
 	set_target_properties(ssl PROPERTIES VERSION ${SSL_VERSION}
-		SOVERSION ${SSL_MAJOR_VERSION})
+		SOVERSION ${SSL_MAJOR_VERSION}
+		PREFIX "lib"
+		OUTPUT_NAME "ssl"
+	)
 endif()
 
 if(ENABLE_LIBRESSL_INSTALL)

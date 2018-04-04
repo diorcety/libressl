@@ -814,13 +814,13 @@ if (BUILD_SHARED_LIBS)
 	export_symbol(crypto ${CMAKE_CURRENT_BINARY_DIR}/crypto_p.sym)
 	if (WIN32)
 		target_link_libraries(crypto Ws2_32.lib)
-		set(CRYPTO_POSTFIX -${CRYPTO_MAJOR_VERSION})
 	endif()
-	set_target_properties(crypto PROPERTIES
-		OUTPUT_NAME crypto${CRYPTO_POSTFIX}
-		ARCHIVE_OUTPUT_NAME crypto${CRYPTO_POSTFIX})
+	set_target_properties(crypto PROPERTIES PREFIX "lib")
 	set_target_properties(crypto PROPERTIES VERSION
-		${CRYPTO_VERSION} SOVERSION ${CRYPTO_MAJOR_VERSION})
+		${CRYPTO_VERSION} SOVERSION ${CRYPTO_MAJOR_VERSION}
+		PREFIX "lib"
+		OUTPUT_NAME "crypto"
+	)
 endif()
 
 if(ENABLE_LIBRESSL_INSTALL)
