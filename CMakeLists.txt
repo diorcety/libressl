@@ -10,6 +10,9 @@ include(GNUInstallDirs)
 
 project (LibreSSL C)
 
+find_package(Threads)
+set(PLATFORM_LDADD "${PLATFORM_LDADD} ${CMAKE_THREAD_LIBS_INIT}")
+
 enable_testing()
 
 file(READ ${CMAKE_CURRENT_SOURCE_DIR}/ssl/VERSION SSL_VERSION)
@@ -283,6 +286,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
 	check_library_exists(rt clock_gettime "time.h" HAVE_CLOCK_GETTIME)
 	if (HAVE_CLOCK_GETTIME)
 		set(OPENSSL_LIBS ${OPENSSL_LIBS} rt)
+		set(PLATFORM_LDADD "${PLATFORM_LDADD} -lrt")
 	endif()
 else()
 	# Otherwise, simply check if it exists
