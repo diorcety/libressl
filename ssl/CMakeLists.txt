@@ -50,6 +50,7 @@ set(
 add_library(ssl ${SSL_SRC})
 if (BUILD_SHARED_LIBS)
 	export_symbol(ssl ${CMAKE_CURRENT_SOURCE_DIR}/ssl.sym)
+	target_link_libraries(ssl ${PLATFORM_LIBS})
 	target_link_libraries(ssl crypto)
 	if (WIN32)
 		target_link_libraries(ssl Ws2_32.lib)

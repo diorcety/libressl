@@ -11,7 +11,7 @@ include(GNUInstallDirs)
 project (LibreSSL C)
 
 find_package(Threads)
-set(PLATFORM_LDADD "${PLATFORM_LDADD} ${CMAKE_THREAD_LIBS_INIT}")
+set(PLATFORM_LIBS ${CMAKE_THREAD_LIBS_INIT})
 
 enable_testing()
 
@@ -286,7 +286,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
 	check_library_exists(rt clock_gettime "time.h" HAVE_CLOCK_GETTIME)
 	if (HAVE_CLOCK_GETTIME)
 		set(OPENSSL_LIBS ${OPENSSL_LIBS} rt)
-		set(PLATFORM_LDADD "${PLATFORM_LDADD} -lrt")
+		set(PLATFORM_LIBS ${PLATFORM_LIBS} -lrt)
 	endif()
 else()
 	# Otherwise, simply check if it exists
@@ -304,6 +304,9 @@ if(SIZEOF_TIME_T STREQUAL "4")
 	                " ** It will behave incorrectly when handling valid RFC5280 dates")
 endif()
 add_definitions(-DSIZEOF_TIME_T=${SIZEOF_TIME_T})
+
+string(REPLACE ";" " " PLATFORM_LDADD_EXTRA "${PLATFORM_LIBS}")
+set(PLATFORM_LDADD "${PLATFORM_LDADD} ${PLATFORM_LDADD_EXTRA}")
 
 add_subdirectory(crypto)
 add_subdirectory(ssl)
