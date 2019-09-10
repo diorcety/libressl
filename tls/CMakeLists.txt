@@ -20,6 +20,7 @@ if(WIN32)
 		compat/ftruncate.c
 		compat/pread.c
 		compat/pwrite.c
+		compat/inet_pton.c
 	)
 endif()
 

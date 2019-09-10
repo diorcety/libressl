@@ -15,10 +15,15 @@
 double
 app_timer_real(int get)
 {
-	static __int64 start;
-	__int64 now;
-
+#if _WIN32_WINNT >= _WIN32_WINNT_VISTA
+	static ULONGLONG start;
+	ULONGLONG now;
 	now = GetTickCount64();
+#else
+	static DWORD start;
+	DWORD now;
+	now = GetTickCount();
+#endif
 	if (get) {
 		return (now - start) / 1000.0;
 	}
