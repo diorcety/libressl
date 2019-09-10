@@ -224,6 +224,7 @@ sed -e "s/compat\///" crypto/Makefile.am.arc4random > \
 echo "copying nc(1) source"
 $CP $bin_src/nc/nc.1 apps/nc
 rm -f apps/nc/*.c apps/nc/*.h
+$CP_LIBC $libc_src/net/inet_pton.c tls/compat
 $CP_LIBC $libc_src/net/base64.c apps/nc/compat
 $CP_LIBC $libc_src/stdlib/strtonum.c apps/nc/compat
 for i in `awk '/SOURCES|HEADERS|MANS/ { print $3 }' apps/nc/Makefile.am` ; do
