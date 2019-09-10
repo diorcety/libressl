@@ -53,7 +53,7 @@ if (BUILD_SHARED_LIBS)
 	target_link_libraries(ssl ${PLATFORM_LIBS})
 	target_link_libraries(ssl crypto)
 	if (WIN32)
-		target_link_libraries(ssl Ws2_32.lib)
+		target_link_libraries(ssl Ws2_32.lib msvcprt.lib)
 	endif()
 	set_target_properties(ssl PROPERTIES PREFIX "lib")
 	set_target_properties(ssl PROPERTIES VERSION ${SSL_VERSION}

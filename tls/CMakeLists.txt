@@ -27,6 +27,7 @@ if(WIN32)
 		compat/getuid.c
 		compat/pread.c
 		compat/pwrite.c
+		compat/inet_pton.c
 	)
 endif()
 
@@ -42,7 +43,7 @@ if (BUILD_SHARED_LIBS)
 	target_link_libraries(tls ${PLATFORM_LIBS})
 	target_link_libraries(tls ssl crypto)
 	if (WIN32)
-		target_link_libraries(tls Ws2_32.lib)
+		target_link_libraries(tls Ws2_32.lib msvcprt.lib)
 	endif()
 	set_target_properties(tls PROPERTIES PREFIX "lib")
 	set_target_properties(tls PROPERTIES VERSION ${TLS_VERSION}

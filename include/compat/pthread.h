@@ -6,6 +6,12 @@
 #ifdef _WIN32
 
 #include <windows.h>
+BOOL __crtInitOnceExecuteOnce(
+  __inout      PINIT_ONCE InitOnce,
+  __in         PINIT_ONCE_FN InitFn,
+  __inout_opt  PVOID Parameter,
+  __out        LPVOID* Context
+);
 
 /*
  * Static once initialization values.
@@ -31,7 +37,7 @@ _pthread_once_win32_cb(PINIT_ONCE once, PVOID param, PVOID *context)
 static inline int
 pthread_once(pthread_once_t *once, void (*cb) (void))
 {
-	BOOL rc = InitOnceExecuteOnce(&once->once, _pthread_once_win32_cb, cb, NULL);
+	BOOL rc = __crtInitOnceExecuteOnce(&once->once, _pthread_once_win32_cb, cb, NULL);
 	if (rc == 0)
 		return -1;
 	else

@@ -269,7 +269,7 @@ set(OPENSSL_LIBS tls ssl crypto)
 
 # Add additional required libs
 if(WIN32)
-	set(OPENSSL_LIBS ${OPENSSL_LIBS} ws2_32)
+	set(OPENSSL_LIBS ${OPENSSL_LIBS} ws2_32 msvcprt)
 endif()
 if(CMAKE_SYSTEM_NAME MATCHES "Linux")
 	set(OPENSSL_LIBS ${OPENSSL_LIBS} pthread)

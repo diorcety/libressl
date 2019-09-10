@@ -814,7 +814,7 @@ if (BUILD_SHARED_LIBS)
 	export_symbol(crypto ${CMAKE_CURRENT_BINARY_DIR}/crypto_p.sym)
 	target_link_libraries(crypto ${PLATFORM_LIBS})
 	if (WIN32)
-		target_link_libraries(crypto Ws2_32.lib)
+		target_link_libraries(crypto Ws2_32.lib msvcprt.lib)
 	endif()
 	set_target_properties(crypto PROPERTIES PREFIX "lib")
 	set_target_properties(crypto PROPERTIES VERSION
