@@ -57,7 +57,6 @@ inet_pton(int af, const char *src, void *dst)
 	}
 	/* NOTREACHED */
 }
-DEF_WEAK(inet_pton);
 
 /* int
  * inet_pton4(src, dst)
